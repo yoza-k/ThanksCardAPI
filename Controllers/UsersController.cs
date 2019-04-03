@@ -24,7 +24,11 @@ namespace ThanksCardAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            // Include を指定することで Department (Department) を同時に取得する。
+            return await _context.Users
+                                    .Include(User => User.Department)
+                                    .ToListAsync();
+            //return await _context.Users.ToListAsync();
         }
 
         // GET: api/Users/5
@@ -75,6 +79,9 @@ namespace ThanksCardAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            // Department には既に存在しているユーザが入るため、更新の対象から外す。
+            _context.Departments.Attach(user.Department);
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
