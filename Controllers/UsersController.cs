@@ -54,6 +54,9 @@ namespace ThanksCardAPI.Controllers
                 return BadRequest();
             }
 
+            // Department には既に存在しているユーザが入るため、更新の対象から外す。
+            _context.Departments.Attach(user.Department);
+
             _context.Entry(user).State = EntityState.Modified;
 
             try
