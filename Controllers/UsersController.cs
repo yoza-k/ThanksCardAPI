@@ -55,7 +55,7 @@ namespace ThanksCardAPI.Controllers
             }
 
             // Department には既に存在しているユーザが入るため、更新の対象から外す。
-            _context.Departments.Attach(user.Department);
+            //_context.Departments.Attach(user.Department);
 
             _context.Entry(user).State = EntityState.Modified;
 
@@ -83,7 +83,7 @@ namespace ThanksCardAPI.Controllers
         public async Task<ActionResult<User>> PostUser(User user)
         {
             // Department には既に存在しているユーザが入るため、更新の対象から外す。
-            _context.Departments.Attach(user.Department);
+            //_context.Departments.Attach(user.Department);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
