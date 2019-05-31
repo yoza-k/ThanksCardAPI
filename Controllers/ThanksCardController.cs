@@ -27,6 +27,8 @@ namespace ThanksCardAPI.Controllers
             return await _context.ThanksCards
                                     .Include(ThanksCard => ThanksCard.From)
                                     .Include(ThanksCard => ThanksCard.To)
+                                    .Include(ThanksCard => ThanksCard.ThanksCardTags)
+                                        .ThenInclude(ThanksCardTag => ThanksCardTag.Tag)
                                     .ToListAsync();
         }
         #endregion

@@ -1,4 +1,5 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ThanksCardAPI.Models;
 
 namespace ThanksCardAPI.Models
 {
@@ -12,5 +13,6 @@ namespace ThanksCardAPI.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<ThanksCard> ThanksCards{ get; set; }
+        public DbSet<ThanksCardAPI.Models.Tag> Tag { get; set; }
     }
 }
