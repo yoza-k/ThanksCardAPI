@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ThanksCardAPI.Models
 {
@@ -12,5 +13,7 @@ namespace ThanksCardAPI.Models
         public long ToId { get; set; }
         public virtual User To { get; set; }
         public DateTime CreatedDateTime { get; set; }
+
+        public virtual ICollection<ThanksCardTag> ThanksCardTags { get; set; }
     }
 }
