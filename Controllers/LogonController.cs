@@ -28,16 +28,14 @@ namespace ThanksCardAPI.Controllers
 
         // POST api/logon
         [HttpPost]
-        public async Task<ActionResult<User>> Post([FromBody] User user)
+        public ActionResult<User> Post([FromBody] User user)
         {
-            var authorizedUser  =  _context.Users.SingleOrDefault(x => x.Name == user.Name && x.Password == user.Password);
-
+            var authorizedUser = _context.Users.SingleOrDefault(x => x.Name == user.Name && x.Password == user.Password);
             if (authorizedUser == null)
             {
                 return NotFound();
             }
-
-            return authorizedUser; 
+            return authorizedUser;
         }
     }
 }
