@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using ThanksCardAPI.Models;
 
@@ -41,7 +42,12 @@ namespace ThanksCardAPI
             //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             //                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            //services.AddControllers();
 
             // API を一覧表示する Swagger の設定
             services.AddSwaggerGen(options =>
