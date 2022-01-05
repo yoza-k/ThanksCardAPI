@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThanksCardAPI", "ThanksCardAPI\ThanksCardAPI.csproj", "{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThanksCardAPI", "ThanksCardAPI.csproj", "{B204BA0A-57A0-4D2C-A970-715BCFF48128}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B204BA0A-57A0-4D2C-A970-715BCFF48128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B204BA0A-57A0-4D2C-A970-715BCFF48128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B204BA0A-57A0-4D2C-A970-715BCFF48128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B204BA0A-57A0-4D2C-A970-715BCFF48128}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BF612398-0278-48F6-B771-B1D3A66D10CF}
+		SolutionGuid = {B22B82E5-B07C-4905-BE99-8507882D9B09}
 	EndGlobalSection
 EndGlobal
