@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThanksCardAPI", "ThanksCardAPI.csproj", "{9225D6AF-DA8D-48AF-9B5C-BA15B5383BA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThanksCardAPI", "ThanksCardAPI\ThanksCardAPI.csproj", "{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9225D6AF-DA8D-48AF-9B5C-BA15B5383BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9225D6AF-DA8D-48AF-9B5C-BA15B5383BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9225D6AF-DA8D-48AF-9B5C-BA15B5383BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9225D6AF-DA8D-48AF-9B5C-BA15B5383BA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC424CA-8B49-47FE-A20F-E28EA3A29DB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9D2B7227-8CCB-4C32-B315-5054621E051F}
+		SolutionGuid = {BF612398-0278-48F6-B771-B1D3A66D10CF}
 	EndGlobalSection
 EndGlobal
