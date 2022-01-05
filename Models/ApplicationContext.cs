@@ -9,10 +9,10 @@ namespace ThanksCardAPI.Models
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<ThanksCard> ThanksCards { get; set; }
-        public DbSet<ThanksCardAPI.Models.Tag> Tag { get; set; }
-        public DbSet<ThanksCardAPI.Models.ThanksCardTag> ThanksCardTag { get; set; }
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Department> Departments { get; set; } = null!;
+        public DbSet<ThanksCard> ThanksCards { get; set; } = null!;
+        public DbSet<ThanksCardAPI.Models.Tag> Tag { get; set; } = null!;
+        public DbSet<ThanksCardAPI.Models.ThanksCardTag> ThanksCardTag { get; set; } = null!;
     }
 }
