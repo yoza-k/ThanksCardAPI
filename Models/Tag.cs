@@ -1,4 +1,5 @@
-﻿namespace ThanksCardAPI.Models
+﻿#nullable disable
+namespace ThanksCardAPI.Models
 {
     public class Tag
     {
