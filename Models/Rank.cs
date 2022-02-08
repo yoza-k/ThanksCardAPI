@@ -1,8 +1,9 @@
-﻿namespace ThanksCardAPI.Models
+﻿#nullable disable
+namespace ThanksCardAPI.Models
 {
     public class Rank
     {
-        public string Name { get; set; } = String.Empty;
+        public string Name { get; set; }
         public int Count { get; set; }
     }
 }
