@@ -78,6 +78,12 @@ namespace ThanksCardAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Department>> PostDepartment(Department department)
         {
+            // Parent Department には既に存在している部署が入るため、更新の対象から外す。
+            if (department.Parent != null)
+            {
+                _context.Departments.Attach(department.Parent);
+            }
+
             _context.Departments.Add(department);
             await _context.SaveChangesAsync();
 
