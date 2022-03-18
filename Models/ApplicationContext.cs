@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#nullable disable
+using Microsoft.EntityFrameworkCore;
 using ThanksCardAPI.Models;
 namespace ThanksCardAPI.Models
 {
@@ -9,9 +10,9 @@ namespace ThanksCardAPI.Models
         {
         }
 
-        public DbSet<User> Users { get; set; } = null!;
-        public DbSet<Department> Departments { get; set; } = null!;
-        public DbSet<ThanksCard> ThanksCards { get; set; } = null!;
-        public DbSet<ThanksCardAPI.Models.Tag> Tag { get; set; } = null!;
+        public DbSet<User> Users { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<ThanksCard> ThanksCards { get; set; }
+        public DbSet<Tag> Tag { get; set; }
     }
 }
