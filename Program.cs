@@ -13,6 +13,7 @@ builder.Services.AddControllers().AddJsonOptions(option =>
                 option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddDbContext<ApplicationContext>(opt =>
      opt.UseNpgsql("Host=localhost; Database=webapp1; Username=postgres; Password=postgres"));
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);//<---‚±‚Ìs‚ð’Ç‰Á
 
 builder.Services.AddControllers();
 
