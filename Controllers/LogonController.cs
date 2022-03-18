@@ -17,6 +17,7 @@ namespace ThanksCardAPI.Controllers
         public LogonController(ApplicationContext context)
         {
             _context = context;
+
             if (_context.Users.Count() == 0)
             {
                 // Usersテーブルが空なら初期データを作成する。
