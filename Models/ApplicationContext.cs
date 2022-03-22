@@ -1,6 +1,6 @@
 ﻿#nullable disable
 using Microsoft.EntityFrameworkCore;
-using ThanksCardAPI.Models;
+
 namespace ThanksCardAPI.Models
 {
     public class ApplicationContext : DbContext
