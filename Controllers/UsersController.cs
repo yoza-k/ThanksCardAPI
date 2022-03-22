@@ -25,7 +25,10 @@ namespace ThanksCardAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            // Include を指定することで Department (Department) を同時に取得する。
+            return await _context.Users
+                                    .Include(User => User.Department)
+                                    .ToListAsync();
         }
 
         // GET: api/Users/5
@@ -71,6 +74,7 @@ namespace ThanksCardAPI.Controllers
             }
 
             return NoContent();
+
         }
 
         // POST: api/Users
