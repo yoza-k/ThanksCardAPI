@@ -35,6 +35,21 @@ namespace ThanksCardAPI.Controllers
         }
         #endregion
 
+        #region GetSearchThanksCards
+        // GET: api/ThanksCards
+        [HttpGet("{searchWorld}")]
+        public async Task<ActionResult<IEnumerable<ThanksCard>>> GetSearchThanksCards(string searchWorld)
+        {
+            // Include を指定することで From, To (Userモデル) を同時に取得する。
+            return await _context.ThanksCards
+                                    .Include(ThanksCard => ThanksCard.From)
+                                    .Include(ThanksCard => ThanksCard.To)
+                                    .Include(ThanksCard => ThanksCard.ThanksCardTags)
+                                        .ThenInclude(ThanksCardTag => ThanksCardTag.Tag)
+                                    .ToListAsync();
+        }
+        #endregion
+
         // POST: api/ThanksCards
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
