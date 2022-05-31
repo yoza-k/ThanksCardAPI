@@ -22,7 +22,11 @@ namespace ThanksCardAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<ThanksCard>>> Post([FromBody] SearchThanksCard searchThanksCard)
         {
-            return await _context.ThanksCards.Include(ThanksCards => ThanksCards.From).Include(ThanksCards => ThanksCards.To).Where(s => s.Body!.Contains(searchThanksCard.SearchWord) || s.Title!.Contains(searchThanksCard.SearchWord) || s.From!.Name.Contains(searchThanksCard.SearchWord) || s.To!.Name.Contains(searchThanksCard.SearchWord)).ToListAsync();
+            return await _context.ThanksCards
+                                    .Include(ThanksCard => ThanksCard.From)
+                                    .Include(ThanksCard => ThanksCard.To)
+                                    .Include(ThanksCard => ThanksCard.ThanksCardTags)
+                                        .ThenInclude(ThanksCardTag => ThanksCardTag.Tag).Where(s => s.Body!.Contains(searchThanksCard.SearchWord) || s.Title!.Contains(searchThanksCard.SearchWord) || s.From!.Name.Contains(searchThanksCard.SearchWord) || s.To!.Name.Contains(searchThanksCard.SearchWord)).ToListAsync();
         }
     }
 }
