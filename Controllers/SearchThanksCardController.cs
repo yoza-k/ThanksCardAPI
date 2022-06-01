@@ -26,7 +26,7 @@ namespace ThanksCardAPI.Controllers
                                     .Include(ThanksCard => ThanksCard.From)
                                     .Include(ThanksCard => ThanksCard.To)
                                     .Include(ThanksCard => ThanksCard.ThanksCardTags)
-                                        .ThenInclude(ThanksCardTag => ThanksCardTag.Tag).Where(s => s.Body!.Contains(searchThanksCard.SearchWord) || s.Title!.Contains(searchThanksCard.SearchWord) || s.From!.Name.Contains(searchThanksCard.SearchWord) || s.To!.Name.Contains(searchThanksCard.SearchWord)).ToListAsync();
+                                        .ThenInclude(ThanksCardTag => ThanksCardTag.Tag).Where(s => s.Body.Contains(searchThanksCard.SearchWord) || s.Title.Contains(searchThanksCard.SearchWord) || s.From.Name.Contains(searchThanksCard.SearchWord) || s.To.Name.Contains(searchThanksCard.SearchWord)).ToListAsync();
         }
     }
 }
