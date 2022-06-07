@@ -18,11 +18,11 @@ namespace ThanksCradAPI.Controllers
         public UsersController(ApplicationContext context)
         {
             _context = context;
-            if (_context.Users.Count() == 0)
+           /* if (_context.Users.Count() == 0)
             {
                 // テーブルが空なら初期データを作成する。
                 _context.Users.Add
-                    (new User
+                   (new User
                     {
                         Id = 000001,
                         Cd = 0001,
@@ -52,7 +52,7 @@ namespace ThanksCradAPI.Controllers
                         DepartmentId = 000016
                     });
                 _context.SaveChanges();
-            }
+            }*/
         }
 
         // GET: api/Users

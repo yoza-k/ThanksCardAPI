@@ -20,7 +20,7 @@ namespace ThanksCardAPI.Controllers
             if (_context.Users.Count() == 0)
             {
                 // Usersテーブルが空なら初期データを作成する。
-                _context.Users.Add(new User { Name = "admin", Password = 0000, DepartmentId = 1 });
+                _context.Users.Add(new User { Name = "admin", Password = 1234, DepartmentId = 1 });
                 _context.Users.Add(new User { Name = "user", Password = 1111, DepartmentId = 2 });
                 _context.SaveChanges();
             }
