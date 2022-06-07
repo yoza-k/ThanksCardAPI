@@ -17,266 +17,205 @@ namespace ThanksCardAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Card", b =>
-            {
-                b.Property<long>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("bigint");
+            modelBuilder.Entity("ThanksCardAPI.Models.Department", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
 
-                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                b.Property<string>("CardBody")
-                    .HasColumnType("text");
+                    b.Property<int>("Code")
+                        .HasColumnType("integer");
 
-                b.Property<DateTime>("CardDate")
-                    .HasColumnType("timestamp with time zone");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
-                b.Property<string>("CardTitle")
-                    .HasColumnType("text");
+                    b.Property<long?>("ParentId")
+                        .HasColumnType("bigint");
 
-                b.Property<long>("CategoryId")
-                    .HasColumnType("bigint");
+                    b.HasKey("Id");
 
-                b.Property<long>("SendId")
-                    .HasColumnType("bigint");
+                    b.HasIndex("ParentId");
 
-                b.Property<long>("SenderId")
-                    .HasColumnType("bigint");
+                    b.ToTable("Departments");
+                });
 
-                b.HasKey("Id");
+            modelBuilder.Entity("ThanksCardAPI.Models.Tag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
 
-                b.HasIndex("CategoryId");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                b.HasIndex("SendId");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
-                b.HasIndex("SenderId");
+                    b.HasKey("Id");
 
-                b.ToTable("Cards");
-            });
+                    b.ToTable("Tag");
+                });
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Category", b =>
-            {
-                b.Property<long>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("bigint");
+            modelBuilder.Entity("ThanksCardAPI.Models.ThanksCard", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
 
-                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                b.Property<long>("CategoryCd")
-                    .HasColumnType("bigint");
+                    b.Property<string>("Body")
+                        .HasColumnType("text");
 
-                b.Property<string>("CategoryName")
-                    .HasColumnType("text");
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("timestamp without time zone");
 
-                b.HasKey("Id");
+                    b.Property<long>("FromId")
+                        .HasColumnType("bigint");
 
-                b.ToTable("Categories");
-            });
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Comment", b =>
-            {
-                b.Property<long>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("bigint");
+                    b.Property<long>("ToId")
+                        .HasColumnType("bigint");
 
-                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    b.HasKey("Id");
 
-                b.Property<long>("CardId")
-                    .HasColumnType("bigint");
+                    b.HasIndex("FromId");
 
-                b.Property<string>("CommentBody")
-                    .HasColumnType("text");
+                    b.HasIndex("ToId");
 
-                b.Property<string>("CommentTitle")
-                    .HasColumnType("text");
+                    b.ToTable("ThanksCards");
+                });
 
-                b.HasKey("Id");
+            modelBuilder.Entity("ThanksCardAPI.Models.ThanksCardTag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
 
-                b.HasIndex("CardId");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                b.ToTable("Comments");
-            });
+                    b.Property<long>("TagId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ThanksCardId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TagId");
+
+                    b.HasIndex("ThanksCardId");
+
+                    b.ToTable("ThanksCardTag");
+                });
+
+            modelBuilder.Entity("ThanksCardAPI.Models.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("DepartmentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("Users");
+                });
 
             modelBuilder.Entity("ThanksCardAPI.Models.Department", b =>
-            {
-                b.Property<long>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("bigint");
+                {
+                    b.HasOne("ThanksCardAPI.Models.Department", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
 
-                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    b.Navigation("Parent");
+                });
 
-                b.Property<long>("DepartmentCd")
-                    .HasColumnType("bigint");
+            modelBuilder.Entity("ThanksCardAPI.Models.ThanksCard", b =>
+                {
+                    b.HasOne("ThanksCardAPI.Models.User", "From")
+                        .WithMany()
+                        .HasForeignKey("FromId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                b.Property<string>("DepartmentName")
-                    .HasColumnType("text");
+                    b.HasOne("ThanksCardAPI.Models.User", "To")
+                        .WithMany()
+                        .HasForeignKey("ToId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                b.Property<long?>("ParentId")
-                    .HasColumnType("bigint");
+                    b.Navigation("From");
 
-                b.Property<int>("Permission")
-                    .HasColumnType("integer");
+                    b.Navigation("To");
+                });
 
-                b.HasKey("Id");
+            modelBuilder.Entity("ThanksCardAPI.Models.ThanksCardTag", b =>
+                {
+                    b.HasOne("ThanksCardAPI.Models.Tag", "Tag")
+                        .WithMany("ThanksCardTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                b.HasIndex("ParentId");
+                    b.HasOne("ThanksCardAPI.Models.ThanksCard", "ThanksCard")
+                        .WithMany("ThanksCardTags")
+                        .HasForeignKey("ThanksCardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                b.ToTable("Departments");
-            });
+                    b.Navigation("Tag");
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Employee", b =>
-            {
-                b.Property<long>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("bigint");
+                    b.Navigation("ThanksCard");
+                });
 
-                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+            modelBuilder.Entity("ThanksCardAPI.Models.User", b =>
+                {
+                    b.HasOne("ThanksCardAPI.Models.Department", "Department")
+                        .WithMany("Users")
+                        .HasForeignKey("DepartmentId");
 
-                b.Property<long>("DepartmentId")
-                    .HasColumnType("bigint");
-
-                b.Property<long>("EmployeeCd")
-                    .HasColumnType("bigint");
-
-                b.Property<string>("EmployeeName")
-                    .HasColumnType("text");
-
-                b.Property<string>("EmployeekanaName")
-                    .HasColumnType("text");
-
-                b.Property<long>("Pass")
-                    .HasColumnType("bigint");
-
-                b.HasKey("Id");
-
-                b.HasIndex("DepartmentId");
-
-                b.ToTable("Employees");
-            });
-
-            modelBuilder.Entity("ThanksCardAPI.Models.Good", b =>
-            {
-                b.Property<long>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("bigint");
-
-                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                b.Property<long>("CardId")
-                    .HasColumnType("bigint");
-
-                b.Property<long>("EmployeeId")
-                    .HasColumnType("bigint");
-
-                b.HasKey("Id");
-
-                b.HasIndex("CardId");
-
-                b.HasIndex("EmployeeId");
-
-                b.ToTable("Goods");
-            });
-
-            modelBuilder.Entity("ThanksCardAPI.Models.Card", b =>
-            {
-                b.HasOne("ThanksCardAPI.Models.Category", "Category")
-                    .WithMany("Cards")
-                    .HasForeignKey("CategoryId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.HasOne("ThanksCardAPI.Models.Employee", "Send")
-                    .WithMany()
-                    .HasForeignKey("SendId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.HasOne("ThanksCardAPI.Models.Employee", "Sender")
-                    .WithMany()
-                    .HasForeignKey("SenderId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.Navigation("Category");
-
-                b.Navigation("Send");
-
-                b.Navigation("Sender");
-            });
-
-            modelBuilder.Entity("ThanksCardAPI.Models.Comment", b =>
-            {
-                b.HasOne("ThanksCardAPI.Models.Card", "Card")
-                    .WithMany("Comments")
-                    .HasForeignKey("CardId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.Navigation("Card");
-            });
+                    b.Navigation("Department");
+                });
 
             modelBuilder.Entity("ThanksCardAPI.Models.Department", b =>
-            {
-                b.HasOne("ThanksCardAPI.Models.Department", "Parent")
-                    .WithMany("Children")
-                    .HasForeignKey("ParentId");
+                {
+                    b.Navigation("Children");
 
-                b.Navigation("Parent");
-            });
+                    b.Navigation("Users");
+                });
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Employee", b =>
-            {
-                b.HasOne("ThanksCardAPI.Models.Department", "Department")
-                    .WithMany("Employees")
-                    .HasForeignKey("DepartmentId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
+            modelBuilder.Entity("ThanksCardAPI.Models.Tag", b =>
+                {
+                    b.Navigation("ThanksCardTags");
+                });
 
-                b.Navigation("Department");
-            });
-
-            modelBuilder.Entity("ThanksCardAPI.Models.Good", b =>
-            {
-                b.HasOne("ThanksCardAPI.Models.Card", "Card")
-                    .WithMany("Goods")
-                    .HasForeignKey("CardId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.HasOne("ThanksCardAPI.Models.Employee", "Employee")
-                    .WithMany()
-                    .HasForeignKey("EmployeeId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.Navigation("Card");
-
-                b.Navigation("Employee");
-            });
-
-            modelBuilder.Entity("ThanksCardAPI.Models.Card", b =>
-            {
-                b.Navigation("Comments");
-
-                b.Navigation("Goods");
-            });
-
-            modelBuilder.Entity("ThanksCardAPI.Models.Category", b =>
-            {
-                b.Navigation("Cards");
-            });
-
-            modelBuilder.Entity("ThanksCardAPI.Models.Department", b =>
-            {
-                b.Navigation("Children");
-
-                b.Navigation("Employees");
-            });
+            modelBuilder.Entity("ThanksCardAPI.Models.ThanksCard", b =>
+                {
+                    b.Navigation("ThanksCardTags");
+                });
 #pragma warning restore 612, 618
         }
     }
