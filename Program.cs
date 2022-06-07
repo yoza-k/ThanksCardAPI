@@ -5,10 +5,6 @@ using Microsoft.OpenApi.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<ApplicationContext>(opt =>
-     opt.UseNpgsql("Host=localhost; Database=TestDB; Username=postgres; Password=postgres"));
-
 // Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(option =>
