@@ -23,12 +23,12 @@ namespace ThanksCardAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rank>>> GetRanks()
         {
-            return await _context.ThanksCards.Include(Card => Card.To)
-                                 .GroupBy(Card => Card.To.Name)
-                                 .Select(Card => new Rank { Name = Card.Key, Count = Card.Count() })
-                                 .Take(3)
-                                 .OrderByDescending(Send => Send.Count)
-                                 .ToListAsync();
+            // ThanksCard を受け取った回数をカウントしてリストで返す
+            return await _context.ThanksCards
+                .GroupBy(t => t.To)
+                .Select(t => new Rank { Name = t.Key.Name, Count = t.Count() })
+                .OrderByDescending(t => t.Count)
+                .ToListAsync();
         }
     }
 }

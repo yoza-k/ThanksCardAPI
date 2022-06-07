@@ -13,8 +13,6 @@ namespace ThanksCardAPI.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<ThanksCard> ThanksCards { get; set; }
-        public DbSet<Tag> Tags { get; set; }
-        public DbSet<Good> Goods { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Tag> Tag { get; set; }
     }
 }

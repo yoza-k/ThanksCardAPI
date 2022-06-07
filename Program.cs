@@ -4,19 +4,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApplicationContext>(opt =>
-     opt.UseNpgsql("Host=localhost; Database=TestDB; Username=postgres; Password=postgres"));
-
 // Add services to the container.
-
+// JSONシリアル化で循環参照を無視
 builder.Services.AddControllers().AddJsonOptions(option =>
                 option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddDbContext<ApplicationContext>(opt =>
      opt.UseNpgsql("Host=localhost; Database=thankscard; Username=postgres; Password=postgres"));
 // DateTime 型 を UTC で データを PostgreSQL に登録
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 builder.Services.AddControllers();
 
 // API を一覧表示する Swagger の設定
@@ -32,7 +31,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
