@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(option =>
                 option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddDbContext<ApplicationContext>(opt =>
-     opt.UseNpgsql("Host=localhost; Database=thankscard; Username=postgres; Password=postgres"));
+     opt.UseNpgsql("Host=localhost; Database=thankscard; Username=postgres; Password=admin"));
 // DateTime å^ Ç UTC Ç≈ ÉfÅ[É^Ç PostgreSQL Ç…ìoò^
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddControllers();
