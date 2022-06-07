@@ -20,30 +20,104 @@ namespace ThanksCardAPI.Controllers
             _context = context;
         }
 
-        #region GetThanksCards
         // GET: api/ThanksCards
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ThanksCard>>> GetThanksCards()
         {
-            // Include を指定することで From, To (Userモデル) を同時に取得する。
-            return await _context.ThanksCards
-                                    .Include(ThanksCard => ThanksCard.From)
-                                    .Include(ThanksCard => ThanksCard.To)
-                                    .Include(ThanksCard => ThanksCard.ThanksCardTags)
-                                        .ThenInclude(ThanksCardTag => ThanksCardTag.Tag)
-                                    .ToListAsync();
+            if (_context.ThanksCards == null)
+            {
+                return NotFound();
+            }
+            return await _context.ThanksCards.ToListAsync();
         }
-        #endregion
+
+        // GET: api/ThanksCards/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ThanksCard>> GetCard(long id)
+        {
+            if (_context.ThanksCards == null)
+            {
+                return NotFound();
+            }
+            var card = await _context.ThanksCards.FindAsync(id);
+
+            if (card == null)
+            {
+                return NotFound();
+            }
+
+            return card;
+        }
+
+        // PUT: api/ThanksCards/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCard(long id, ThanksCard card)
+        {
+            if (id != card.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(card).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CardExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
 
         // POST: api/ThanksCards
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ThanksCard>> Post([FromBody] ThanksCard thanksCard)
+        public async Task<ActionResult<ThanksCard>> PostCard(ThanksCard card)
         {
-            _context.ThanksCards.Add(thanksCard);
+            if (_context.ThanksCards == null)
+            {
+                return Problem("Entity set 'ApplicationContext.ThanksCards'  is null.");
+            }
+            _context.ThanksCards.Add(card);
             await _context.SaveChangesAsync();
-            // TODO: Error Handling
-            return thanksCard;
+
+            return CreatedAtAction("GetCard", new { id = card.Id }, card);
+        }
+
+        // DELETE: api/ThanksCards/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCard(long id)
+        {
+            if (_context.ThanksCards == null)
+            {
+                return NotFound();
+            }
+            var card = await _context.ThanksCards.FindAsync(id);
+            if (card == null)
+            {
+                return NotFound();
+            }
+
+            _context.ThanksCards.Remove(card);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool CardExists(long id)
+        {
+            return (_context.ThanksCards?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
