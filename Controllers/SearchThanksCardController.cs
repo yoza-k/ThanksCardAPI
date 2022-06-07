@@ -26,28 +26,27 @@ namespace ThanksCardAPI.Controllers
         {
 
             return await _context.ThanksCards
-                                    .Include(Card => Card.To).ThenInclude(User => User.Department)
-                                    .Include(Card => Card.From).ThenInclude(User => User.Department)
+                                    .Include(Card => Card.To).ThenInclude(Employee => Employee.Department)
+                                    .Include(Card => Card.From).ThenInclude(Employee => Employee.Department)
                                     .Include(Card => Card.Tag)
                                     .Where(s => s.Body.Contains(searchtextThanksCard.SearchWord) || s.Title.Contains(searchtextThanksCard.SearchWord) || s.To.Name.Contains(searchtextThanksCard.SearchWord) || s.From.Name.Contains(searchtextThanksCard.SearchWord)).ToListAsync();
         }
         [HttpPut]
-        public async Task<ActionResult<IEnumerable<ThanksCard>>> Card(string? Cardtitle, string? TagName, string? DepName, string? UserName, DateTime CardTime)
+        public async Task<ActionResult<IEnumerable<ThanksCard>>> Card(string? Cardtitle, string? CategoryName, string? DepName, string? EmpName, string? CardTime = "0000-00")
         {
             string? title = (Cardtitle);
-            int year = CardTime.Year;
-            int month = CardTime.Month;
+            DateTime? time = DateTime.Parse(CardTime);
             string? dep = (DepName);
-            string? user = (UserName);
-            string? tag = (TagName);
-            if (_context.ThanksCards == null || (title == null && year == null && month==null && dep == null && User == null && tag == null))
+            string? emp = (EmpName);
+            string? cate = (CategoryName);
+            if (_context.ThanksCards == null || (title == null && time == null && dep == null && emp == null && cate == null))
             {
                 return NotFound();
             }
             return await _context.ThanksCards.Include(Card => Card.From).ThenInclude(Employee => Employee.Department)
                                  .Include(Card => Card.To).ThenInclude(Employee => Employee.Department)
                                  .Include(Card => Card.Tag)
-                                 .Where(s => s.Title.Contains(title) || s.CreatedDateTime.Equals(year)|| s.CreatedDateTime.Equals(month) || s.To.Department.Name.Contains(dep) || s.From.Department.Name.Contains(dep) || s.To.Name.Contains(user) || s.From.Name.Contains(user) || s.Tag.Name.Contains(tag)).ToListAsync();
+                                 .Where(s => s.Title.Contains(title) || s.CreatedDateTime.Equals(time) || s.To.Department.Name.Contains(dep) || s.From.Department.Name.Contains(dep) || s.To.Name.Contains(emp) || s.From.Name.Contains(emp) || s.Tag.Name.Contains(cate)).ToListAsync();
         }
 
     }
