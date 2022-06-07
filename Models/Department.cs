@@ -4,7 +4,7 @@ namespace ThanksCardAPI.Models
     public class Department
     {
         public long Id { get; set; }
-        public int Cd { get; set; }
+        public int Code { get; set; }
         public string Name { get; set; }
 
         // 部と課のような階層構造を実現するために、自己参照(DepartmentエンティティがDepartmentエンティティとリレーションを持つ)を利用する
@@ -14,7 +14,7 @@ namespace ThanksCardAPI.Models
         public long? ParentId { get; set; }
         public virtual Department Parent { get; set; }
         public virtual ICollection<Department> Children { get; set; }
-        public int Permission { get; set; }
+
         // 1対多: Department エンティティには複数の User エンティティが属する
         public virtual ICollection<User> Users { get; set; }
     }
