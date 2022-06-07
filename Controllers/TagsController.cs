@@ -7,15 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThanksCardAPI.Models;
 
-namespace ThanksCardAPI.Controllers
+namespace TestAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class TagsController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public CategoriesController(ApplicationContext context)
+        public TagsController(ApplicationContext context)
         {
             _context = context;
             if (_context.Tags.Count() == 0)
@@ -41,7 +41,7 @@ namespace ThanksCardAPI.Controllers
 
         // GET: api/Tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tag>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
             if (_context.Tags == null)
             {
