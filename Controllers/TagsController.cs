@@ -11,46 +11,74 @@ namespace ThanksCardAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TagsController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public TagsController(ApplicationContext context)
+        public CategoriesController(ApplicationContext context)
         {
             _context = context;
+            if (_context.Tags.Count() == 0)
+            {
+                // テーブルが空なら初期データを作成する。
+                _context.Tags.Add(
+                    new Tag
+                    {
+                        Id = 000001,
+                        Cd = 0001,
+                        Name = "感謝"
+                    });
+                _context.Tags.Add(
+                    new Tag
+                    {
+                        Id = 000002,
+                        Cd = 0002,
+                        Name = "相談"
+                    });
+                _context.SaveChanges();
+            }
         }
 
         // GET: api/Tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tag>>> GetTag()
+        public async Task<ActionResult<IEnumerable<Tag>>> GetCategories()
         {
-            return await _context.Tag.ToListAsync();
+            if (_context.Tags == null)
+            {
+                return NotFound();
+            }
+            return await _context.Tags.ToListAsync();
         }
 
         // GET: api/Tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tag>> GetTag(long id)
+        public async Task<ActionResult<Tag>> GetCategory(long id)
         {
-            var tag = await _context.Tag.FindAsync(id);
+            if (_context.Tags == null)
+            {
+                return NotFound();
+            }
+            var category = await _context.Tags.FindAsync(id);
 
-            if (tag == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return tag;
+            return category;
         }
 
         // PUT: api/Tags/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(long id, Tag tag)
+        public async Task<IActionResult> PutCategory(long id, Tag category)
         {
-            if (id != tag.Id)
+            if (id != category.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tag).State = EntityState.Modified;
+            _context.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +86,7 @@ namespace ThanksCardAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TagExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -72,34 +100,43 @@ namespace ThanksCardAPI.Controllers
         }
 
         // POST: api/Tags
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tag>> PostTag(Tag tag)
+        public async Task<ActionResult<Tag>> PostCategory(Tag category)
         {
-            _context.Tag.Add(tag);
+            if (_context.Tags == null)
+            {
+                return Problem("Entity set 'ApplicationContext.Tags'  is null.");
+            }
+            _context.Tags.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTag", new { id = tag.Id }, tag);
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
         // DELETE: api/Tags/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Tag>> DeleteTag(long id)
+        public async Task<IActionResult> DeleteCategory(long id)
         {
-            var tag = await _context.Tag.FindAsync(id);
-            if (tag == null)
+            if (_context.Tags == null)
+            {
+                return NotFound();
+            }
+            var category = await _context.Tags.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            _context.Tag.Remove(tag);
+            _context.Tags.Remove(category);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TagExists(long id)
+        private bool CategoryExists(long id)
         {
-            return _context.Tag.Any(e => e.Id == id);
+            return (_context.Tags?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
