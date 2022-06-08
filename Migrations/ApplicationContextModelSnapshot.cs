@@ -17,7 +17,7 @@ namespace ThanksCardAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -54,6 +54,9 @@ namespace ThanksCardAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<int>("Admin")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Cd")
                         .HasColumnType("integer");
 
@@ -62,9 +65,6 @@ namespace ThanksCardAPI.Migrations
 
                     b.Property<long?>("ParentId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("Admin")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -81,10 +81,7 @@ namespace ThanksCardAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("CardId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("ThnaksCardId")
+                    b.Property<long>("ThanksCardId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("UserId")
@@ -92,7 +89,7 @@ namespace ThanksCardAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ThnaksCardId");
+                    b.HasIndex("ThanksCardId");
 
                     b.HasIndex("UserId");
 
@@ -207,9 +204,11 @@ namespace ThanksCardAPI.Migrations
 
             modelBuilder.Entity("ThanksCardAPI.Models.Good", b =>
                 {
-                    b.HasOne("ThanksCardAPI.Models.ThanksCard", "ThnaksCard")
+                    b.HasOne("ThanksCardAPI.Models.ThanksCard", "ThanksCard")
                         .WithMany("Goods")
-                        .HasForeignKey("ThnaksCardId");
+                        .HasForeignKey("ThanksCardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ThanksCardAPI.Models.User", "User")
                         .WithMany()
@@ -217,7 +216,7 @@ namespace ThanksCardAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ThnaksCard");
+                    b.Navigation("ThanksCard");
 
                     b.Navigation("User");
                 });
