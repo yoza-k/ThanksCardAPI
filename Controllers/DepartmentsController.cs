@@ -27,7 +27,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0001,
                     Name = "代表取締役社長",
                     ParentId = null,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -35,7 +35,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0002,
                     Name = "管理部",
                     ParentId = null,
-                    Permission = 1
+                    Admin = 1
                 });
                 _context.Departments.Add(new Department
                 {
@@ -43,7 +43,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0003,
                     Name = "経理部",
                     ParentId = null,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -51,7 +51,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0004,
                     Name = "営業部",
                     ParentId = null,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -59,7 +59,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0005,
                     Name = "企画部",
                     ParentId = null,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -67,7 +67,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0006,
                     Name = "宿泊部",
                     ParentId = null,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -75,7 +75,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0007,
                     Name = "人事課",
                     ParentId = 0002,
-                    Permission = 1
+                    Admin = 1
                 });
                 _context.Departments.Add(new Department
                 {
@@ -83,7 +83,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0008,
                     Name = "経理課",
                     ParentId = 0003,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -91,7 +91,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0009,
                     Name = "総務課",
                     ParentId = 0003,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -99,7 +99,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0010,
                     Name = "国際営業課",
                     ParentId = 0004,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -107,7 +107,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0011,
                     Name = "宴会予約",
                     ParentId = 0004,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -115,7 +115,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0012,
                     Name = "企画課",
                     ParentId = 0005,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -123,7 +123,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0013,
                     Name = "業務推進課",
                     ParentId = 0006,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -131,7 +131,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0014,
                     Name = "海外ホテル予約課",
                     ParentId = 0006,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -139,7 +139,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0015,
                     Name = "フロント課",
                     ParentId = 0006,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -147,7 +147,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0016,
                     Name = "ベルパーソン課",
                     ParentId = 0006,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -155,7 +155,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0017,
                     Name = "ドアマン課",
                     ParentId = 0006,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -163,7 +163,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0018,
                     Name = "コンシェルジュ課",
                     ParentId = 0006,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.Departments.Add(new Department
                 {
@@ -171,7 +171,7 @@ namespace ThanksCardAPI.Controllers
                     Cd = 0019,
                     Name = "ハウスキーピング課",
                     ParentId = 0006,
-                    Permission = 0
+                    Admin = 0
                 });
                 _context.SaveChanges();
             }

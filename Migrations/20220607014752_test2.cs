@@ -19,7 +19,7 @@ namespace ThanksCardAPI.Migrations
                     Cd = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     ParentId = table.Column<long>(type: "bigint", nullable: true),
-                    Permission = table.Column<int>(type: "integer", nullable: false)
+                    Admin = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
