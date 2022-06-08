@@ -65,7 +65,7 @@ namespace ThanksCardAPI.Migrations
                     b.Property<long?>("ParentId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Permission")
+                    b.Property<int>("Admin")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");

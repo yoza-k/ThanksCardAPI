@@ -14,7 +14,7 @@ namespace ThanksCardAPI.Models
         public long? ParentId { get; set; }
         public virtual Department Parent { get; set; }
         public virtual ICollection<Department> Children { get; set; }
-        public int Permission { get; set; }
+        public int Admin { get; set; }
         // 1対多: Department エンティティには複数の User エンティティが属する
         public virtual ICollection<User> Users { get; set; }
     }
