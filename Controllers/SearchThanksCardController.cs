@@ -35,8 +35,8 @@ namespace ThanksCardAPI.Controllers
         public async Task<ActionResult<IEnumerable<ThanksCard>>> Card(string? Cardtitle, string? TagName, string? DepName, string? UserName, DateTime CardTime)
         {
             string? title = (Cardtitle);
-            int year = CardTime.Year;
-            int month = CardTime.Month;
+            int? year = CardTime.Year;
+            int? month = CardTime.Month;
             string? dep = (DepName);
             string? user = (UserName);
             string? tag = (TagName);
@@ -47,7 +47,7 @@ namespace ThanksCardAPI.Controllers
             return await _context.ThanksCards.Include(Card => Card.From).ThenInclude(Employee => Employee.Department)
                                  .Include(Card => Card.To).ThenInclude(Employee => Employee.Department)
                                  .Include(Card => Card.Tag)
-                                 .Where(s => s.Title.Contains(title) || s.CreatedDateTime.Equals(year)|| s.CreatedDateTime.Equals(month) || s.To.Department.Name.Contains(dep) || s.From.Department.Name.Contains(dep) || s.To.Name.Contains(user) || s.From.Name.Contains(user) || s.Tag.Name.Contains(tag)).ToListAsync();
+                                 .Where(s => s.Title.Contains(title) || (s.CreatedDateTime.Year.Equals(year)&& s.CreatedDateTime.Month.Equals(month)) || s.To.Department.Name.Contains(dep) || s.From.Department.Name.Contains(dep) || s.To.Name.Contains(user) || s.From.Name.Contains(user) || s.Tag.Name.Contains(tag)).ToListAsync();
         }
 
     }
